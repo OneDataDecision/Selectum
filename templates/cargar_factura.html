@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Cargar Factura – Selectum{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 500px;">
+    <h1 class="text-center py-3">Cargar Factura</h1>
+
+    <form action="{{ url_for('facturas.cargar_factura') }}"
+          method="post"
+          enctype="multipart/form-data"
+          class="px-4 pb-4">
+        <div class="mb-3">
+            <label for="archivo" class="form-label">Selecciona el archivo PDF:</label>
+            <input type="file" name="archivo" id="archivo" class="form-control" accept="application/pdf" required>
+        </div>
+        <button type="submit" class="btn-confirmar w-100">Leer Factura PDF</button>
+    </form>
+
+    <a class="back-link" href="{{ url_for('index') }}">&larr; Volver al Inicio</a>
+</div>
+{% endblock %}

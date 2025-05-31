@@ -1,0 +1,16 @@
+# Ignorar carpetas de entorno virtual (ejemplos)
+venv/
+env/
+.venv/
+# Ignorar archivos compilados Python
+__pycache__/
+*.pyc
+# Ignorar la base de datos SQLite local (no subirla)
+selectum.db
+# Ignorar archivos de entorno (si usas .env)
+.env
+# Ignorar configuraciones del sistema operativo
+desktop.ini
+Thumbs.db
+# Ignorar VS Code settings
+.vscode/

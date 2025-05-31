@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Subir Evidencia – Selectum{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+    <h1 class="text-center py-3">Subir Evidencia</h1>
+    <form action="{{ url_for('despachos.guardar_evidencia', id=id) }}" method="post" enctype="multipart/form-data" class="px-4">
+        <div class="mb-3">
+            <label for="evidencia" class="form-label">Archivo de Evidencia (.jpg, .jpeg, .png, .pdf):</label>
+            <input type="file" id="evidencia" name="evidencia" class="form-control" accept=".jpg,.jpeg,.png,.pdf" required>
+        </div>
+        <div class="mb-3">
+            <label for="observaciones" class="form-label">Observaciones (opcional):</label>
+            <textarea id="observaciones" name="observaciones" rows="4" class="form-control"
+                      placeholder="Escribe aquí si hubo algo especial en la entrega..."></textarea>
+        </div>
+        <button type="submit" class="btn-confirmar w-100">Subir Evidencia 📎</button>
+    </form>
+
+    <a class="back-link" href="{{ url_for('despachos.seguimiento') }}">&larr; Volver a Seguimiento</a>
+</div>
+{% endblock %}

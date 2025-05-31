@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Factura – Selectum{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+    <h1 class="text-center py-3">Confirmar Datos Extraídos</h1>
+    
+    <!-- Formulario de confirmación -->
+    <form action="{{ url_for('facturas.confirmar_factura') }}" method="post" class="px-4">
+        <div class="mb-3">
+            <label class="form-label">Cliente:</label>
+            <input type="text" name="nombre_cliente" class="form-control" value="{{ nombre_cliente }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dirección:</label>
+            <input type="text" name="direccion_cliente" class="form-control" value="{{ direccion_cliente }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Orden de Compra:</label>
+            <input type="text" name="orden_compra" class="form-control" value="{{ orden_compra }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Referencia Producto:</label>
+            <input type="text" name="referencia_producto" class="form-control" value="{{ referencia_producto }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cantidad:</label>
+            <input type="text" name="cantidad" class="form-control" value="{{ cantidad }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Bodega de Despacho:</label>
+            <input type="text" name="bodega" class="form-control" value="{{ bodega }}" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Valor:</label>
+            <input type="text" name="valor" class="form-control" value="{{ valor }}" required>
+        </div>
+
+        {% if error %}
+          <p class="text-danger">{{ error }}</p>
+        {% endif %}
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn-confirmar">✅ Confirmar Factura</button>
+            <a href="{{ url_for('facturas.cargar_factura') }}" class="btn-cancelar">↩️ Volver</a>
+        </div>
+    </form>
+
+    <hr/>
+
+    <!-- Formulario de rechazo -->
+    <form action="{{ url_for('despachos.rechazar_despacho_factura') }}" method="post" class="px-4">
+        <input type="hidden" name="nombre_cliente"       value="{{ nombre_cliente }}">
+        <input type="hidden" name="direccion_cliente"    value="{{ direccion_cliente }}">
+        <input type="hidden" name="orden_compra"         value="{{ orden_compra }}">
+        <input type="hidden" name="referencia_producto"  value="{{ referencia_producto }}">
+        <input type="hidden" name="cantidad"             value="{{ cantidad }}">
+        <input type="hidden" name="bodega"               value="{{ bodega }}">
+        <input type="hidden" name="valor"                value="{{ valor }}">
+
+        <div class="mb-3">
+            <label for="motivo" class="form-label">Motivo de rechazo (opcional):</label>
+            <textarea name="motivo" id="motivo" rows="3" class="form-control"
+                      placeholder="Escribe aquí si hay motivo de rechazo..."></textarea>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn-cancelar">❌ Rechazar Factura</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Orden de Despacho – Selectum{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4 text-center">Orden de Despacho 🚚</h1>
+
+    <form action="{{ url_for('despachos.confirmar_despacho') }}" method="post"
+          class="shadow p-4 rounded bg-white mx-auto" style="max-width: 600px;">
+        <!-- Campos ocultos obligatorios: -->
+        <input type="hidden" name="fecha_recepcion"     value="{{ fecha_recepcion }}">
+        <input type="hidden" name="hora_solicitud"      value="{{ hora_solicitud }}">
+        <input type="hidden" name="origen"              value="{{ origen }}">
+        <input type="hidden" name="destino"             value="{{ destino }}">
+        <input type="hidden" name="producto"            value="{{ producto }}">
+        <input type="hidden" name="unidades"            value="{{ unidades }}">
+        <input type="hidden" name="documento_comercial" value="{{ documento_comercial }}">
+        <input type="hidden" name="peso"                value="{{ peso }}">
+        <input type="hidden" name="volumen"             value="{{ volumen }}">
+        <input type="hidden" name="urgente"             value="{{ urgente }}">
+        <input type="hidden" name="operador_logistico"  value="{{ operador }}">
+        <input type="hidden" name="costo_estimado"      value="{{ costo_estimado }}">
+        <input type="hidden" name="salida"              value="{{ salida }}">
+
+        <!-- Mostrar cada dato al usuario -->
+        <div class="mb-3"><strong>Origen:</strong> {{ origen }}</div>
+        <div class="mb-3"><strong>Destino:</strong> {{ destino }}</div>
+        <div class="mb-3"><strong>Producto:</strong> {{ producto }}</div>
+        <div class="mb-3"><strong>Unidades:</strong> {{ unidades }}</div>
+        <div class="mb-3"><strong>Documento Comercial:</strong> {{ documento_comercial }}</div>
+        <div class="mb-3"><strong>Peso Total (kg):</strong> {{ peso }}</div>
+        <div class="mb-3"><strong>Volumen Total (m³):</strong> {{ volumen }}</div>
+        <div class="mb-3"><strong>Urgente:</strong> {{ urgente }}</div>
+        <div class="mb-3"><strong>Transportador Elegido:</strong> {{ operador }}</div>
+        <div class="mb-3"><strong>Costo Estimado (COP):</strong> {{ costo_estimado }}</div>
+        <div class="mb-3"><strong>Salida Estimada:</strong> {{ salida }}</div>
+        <div class="mb-3"><strong>Hora Solicitud:</strong> {{ hora_solicitud }}</div>
+        <div class="mb-3"><strong>Fecha Recepción:</strong> {{ fecha_recepcion }}</div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success" onclick="return confirmarDespacho();">
+                Confirmar Despacho 🚚
+            </button>
+            <a href="{{ url_for('nuevo') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+function confirmarDespacho() {
+    return confirm('¿Estás seguro de confirmar este despacho? 🚚');
+}
+</script>
+{% endblock %}

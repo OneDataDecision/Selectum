@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Seguimiento – Selectum{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1>Seguimiento de Despachos</h1>
+  <table class="table table-striped table-hover mt-4">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Producto</th>
+        <th>Operador</th>
+        <th>Estado</th>
+        <th>Guía</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in despachos %}
+      <tr>
+        <td>{{ d['id'] }}</td>
+        <td>{{ d['origen'] }}</td>
+        <td>{{ d['destino'] }}</td>
+        <td>{{ d['producto'] }}</td>
+        <td>{{ d['operador_logistico'] }}</td>
+        <td>{{ d['estado'] }}</td>
+
+        <!-- Columna GUÍA: si d['numero_guia'] no es nulo, muéstralo; si no y el estado es 'Pendiente de guía', muestra formulario -->
+        <td>
+          {% if d['numero_guia'] %}
+            {{ d['numero_guia'] }}
+          {% elif d['estado'] == 'Pendiente de guía' %}
+            <!-- Formulario en línea para ingresar número de guía -->
+            <form action="{{ url_for('despachos.actualizar_guia', id=d['id']) }}" method="post" class="d-flex">
+              <input type="text"
+                     name="numero_guia"
+                     class="form-control form-control-sm me-2"
+                     placeholder="Ingresa guía"
+                     required>
+              <button type="submit" class="btn btn-sm btn-primary">OK</button>
+            </form>
+          {% else %}
+            —
+          {% endif %}
+        </td>
+
+        <!-- Columna ACCIÓN: si estado es 'En tránsito', permitir subir evidencia;
+                           si estado es 'Pendiente de guía', no hay acción ahí;
+                           si estado es 'Entregado', no hay acción -->
+        <td>
+          {% if d['estado'] == 'En tránsito' %}
+            <a href="{{ url_for('despachos.subir_evidencia', id=d['id']) }}"
+               class="btn btn-sm btn-success">
+              Subir Evidencia
+            </a>
+          {% else %}
+            —
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard – Selectum{% endblock %}
+
+{% block content %}
+<div class="dashboard mx-auto" style="max-width: 800px;">
+    <h1 class="mb-4 text-center">Dashboard de Selectum</h1>
+
+    <div class="row mb-5">
+        <div class="col-md-3">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Total Despachos</h5>
+                    <p class="card-text display-6">{{ total_despachos }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Entregados</h5>
+                    <p class="card-text display-6">{{ entregados }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">En Curso</h5>
+                    <p class="card-text display-6">{{ en_curso }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Promedio Días Tránsito</h5>
+                    <p class="card-text display-6">{{ promedio_transito }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow">
+        <div class="card-body">
+            <canvas id="graficoTransportadores"></canvas>
+        </div>
+    </div>
+
+    <a class="back-link" href="{{ url_for('despachos.seguimiento') }}">&larr; Volver al Seguimiento</a>
+</div>
+
+<script>
+const ctx = document.getElementById('graficoTransportadores').getContext('2d');
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: {{ transportadores | tojson }},
+        datasets: [{
+            data: {{ conteos | tojson }},
+            backgroundColor: [],  // Déjalo vacío para que Chart.js asigne colores por defecto
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { boxWidth: 20, padding: 15 }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

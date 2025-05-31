@@ -1,0 +1,25 @@
+# Query: url_for('seguimiento')
+# ContextLines: 1
+
+5 results - 1 file
+
+app.py:
+  397  
+  398:     return redirect(url_for('despachos.seguimiento'))
+  399  # Agrega esto al final de tu app.py
+
+  467  
+  468:     return redirect(url_for('despachos.seguimiento'))
+  469  
+
+  505  
+  506:     return redirect(url_for('despachos.seguimiento'))
+  507  
+
+  548      # Redireccionar al seguimiento directamente
+  549:     return redirect(url_for('despachos.seguimiento'))
+  550  
+
+  593  
+  594:     return redirect(url_for('despachos.seguimiento'))
+  595  

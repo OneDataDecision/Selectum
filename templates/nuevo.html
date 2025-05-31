@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Nuevo Despacho – Selectum{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 500px;">
+    <h1 class="text-center py-3">Crear un nuevo despacho</h1>
+    <form action="{{ url_for('despachos.procesar') }}" method="post">
+        <div class="mb-3">
+            <label for="origen" class="form-label">Origen:</label>
+            <input type="text" id="origen" name="origen" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="destino" class="form-label">Destino:</label>
+            <input type="text" id="destino" name="destino" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="producto" class="form-label">Producto / Descripción:</label>
+            <input type="text" id="producto" name="producto" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="unidades" class="form-label">Unidades:</label>
+            <input type="number" id="unidades" name="unidades" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="documento_comercial" class="form-label">Factura / Remisión:</label><br>
+            <input type="text" id="documento_comercial" name="documento_comercial" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="peso" class="form-label">Peso total (kg):</label>
+            <input type="number" id="peso" name="peso_total" class="form-control" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="volumen" class="form-label">Volumen total (m³):</label>
+            <input type="number" id="volumen" name="volumen_total" class="form-control" step="0.01">
+        </div>
+        <div class="mb-3">
+            <label for="urgente" class="form-label">¿Es urgente?</label>
+            <select id="urgente" name="urgente" class="form-select" required>
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Enviar Despacho</button>
+    </form>
+</div>
+{% endblock %}

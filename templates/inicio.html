@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio – Selectum{% endblock %}
+
+{% block content %}
+<div class="logo-container">
+  <img src="{{ url_for('static', filename='img/logo.png') }}"
+       alt="Selectum Logo"
+       class="logo">
+</div>
+{% endblock %}
